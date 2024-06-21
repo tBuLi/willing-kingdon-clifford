@@ -6,3 +6,6 @@ dependencies:
   - xeus-python
   - pip:
       - kingdon
+      - sympy
+      - anywidget
+      - numpy
