@@ -14,3 +14,4 @@ jupyterlab_miami_nights
 
 # Teahouse dependencies
 anywidget==0.9.9
+voici-core~=0.6
