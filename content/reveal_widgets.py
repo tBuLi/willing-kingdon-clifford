@@ -15,20 +15,21 @@ class FragmentWidget(anywidget.AnyWidget):
       btn.innerHTML = `${state()}, ${fragment()}`;
 
       document.addEventListener("slidechanged", (x) => {
+          console.log(x);
         model.set("state", (x.indexh, x.indexv));
         model.set("fragment", -1);
         model.save_changes();
-        console.log(`${state()} ${fragment()}`);
+        console.log(`${state()}, ${fragment()}`);
       });
       document.addEventListener("fragmentshown", (x) => {
         model.set("fragment", fragment() + 1);
         model.save_changes();
-        console.log(`${state()} ${fragment()}`);
+        console.log(`${state()}, ${fragment()}`);
       });
       document.addEventListener("fragmenthidden", (x) => {
         model.set("fragment", fragment() - 1);
         model.save_changes();
-        console.log(`${state()} ${fragment()}`);
+        console.log(`${state()}, ${fragment()}`);
       });
     }
     export default { render };
@@ -41,15 +42,6 @@ class FragmentWidget(anywidget.AnyWidget):
     @traitlets.observe("slide", "subslide")
     def _pack_state(self, change):
         self.state = (self.slide, self.subslide)
-        
-    # @property
-    # def state(self):
-    #     return self.slide, self.subslide, self.fragment
-
-    # @property
-    # def slide_state(self):
-    #     return self.slide, self.subslide
-
 
 # import anywidget
 # import traitlets
