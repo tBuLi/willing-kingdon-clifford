@@ -13,12 +13,12 @@ points1 = alg3d.vector(coords, keys=('e0', 'e1', 'e2')).dual()
 points2 = points1.map(lambda v: np.roll(v, 1, axis=-1))
 shape = list(zip(points1, points2))
 
-t0 = None
-L1 = alg3d.vector(e1=1).normalized() ^ PLANE
+L1 = alg3d.vector(e2=1).normalized() ^ PLANE
 
 
 def refl_2d_graph_func():
-    t = timeit.default_timer() / 50
+    # t = timeit.default_timer() / 50
+    t = np.pi / 4
     # Create the reflected shape and the lines between them
     R = np.cos(t) + ORIGIN*np.sin(t)
     L1p = R >> L1
@@ -29,9 +29,9 @@ def refl_2d_graph_func():
     
     return [
         L1p,
-        clrs[0],
-        *shape, 
         clrs[2],
+        *shape, 
+        clrs[0],
         *rshape,
         '<G stroke-width="0.002">',clrs[0],
         *rlines,
