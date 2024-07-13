@@ -6,13 +6,13 @@ from .config import alg3d, clrs, PLANE, ORIGIN
 
 L1 = alg3d.vector(e1=1).normalized() ^ PLANE
 L2 = alg3d.vector(e1=1, e2=0.5).normalized() ^ PLANE
-
+intersection = L1.cp(L2)
 
 sw_slider = ipy.FloatSlider(
     value=0.0,
     min=-1.0,
     max=1.0,
-    step=0.05,
+    step=0.1,
     description='',
     disabled=False,
     continuous_update=True,
@@ -34,8 +34,7 @@ def sw_graph_func():
         ]
     elif sw_slider.value < 1.0:
         t = np.arccos((L1 | L2).e) * sw_slider.value
-        intersection = L1 ^ L2
-        R = np.cos(t) + intersection*np.sin(t)
+        R = np.cos(t / 2) + intersection*np.sin(t / 2)
         L2p = R >> L2
         L1p = R >> L1
         
