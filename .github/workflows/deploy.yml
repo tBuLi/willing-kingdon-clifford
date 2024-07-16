@@ -37,7 +37,7 @@ jobs:
           --contents=content
           --output-dir=dist
           --template=reveal
-          --VoilaConfiguration.resources="{'reveal': {'theme': 'simple', 'scroll': false}}"
+          --VoilaConfiguration.resources={'reveal': {'theme': 'simple', 'scroll': false}}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
