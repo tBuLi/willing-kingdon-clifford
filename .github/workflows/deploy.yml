@@ -31,8 +31,13 @@ jobs:
 
       - name: Build the JupyterLite site
         shell: bash -l {0}
-        run: voici build --contents=content --output-dir=dist --template=reveal
-        --VoilaConfiguration.resources="{'reveal': {'theme': 'simple', 'scroll': false}}"
+        run: >-
+          voici
+          build
+          --contents=content
+          --output-dir=dist
+          --template=reveal
+          --VoilaConfiguration.resources="{'reveal': {'theme': 'simple', 'scroll': false}}"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
