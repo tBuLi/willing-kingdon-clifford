@@ -13,5 +13,10 @@ from animations.birefl_gauge import (
 )
 from animations.points_gp_graph import points_gp_graph_func
 from animations.sw_graph import sw_graph_func
+from animations.proj_graph import proj_graph_func
 from animations.birefl_iden_graph import birefl_iden_graph_func
 from animations.birefl_point_graph import birefl_point_graph_func
+from animations.lens_graph import (
+    lens_graph_func_0,
+    lens_graph_func_1,
+)
