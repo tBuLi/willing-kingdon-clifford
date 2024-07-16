@@ -5,7 +5,7 @@ options = dict(
     lineWidth=4,
     pointRadius=2.5,
     fontSize=3,
-    clip=10,
+    clip=5,
 )
 animated_options = dict(animate=1, **options)
 clrs = [

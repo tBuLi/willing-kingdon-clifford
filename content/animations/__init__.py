@@ -16,7 +16,6 @@ from animations.sw_graph import sw_graph_func
 from animations.proj_graph import proj_graph_func
 from animations.birefl_iden_graph import birefl_iden_graph_func
 from animations.birefl_point_graph import birefl_point_graph_func
-from animations.lens_graph import (
-    lens_graph_func_0,
-    lens_graph_func_1,
-)
+from animations.lens_graph_0 import lens_graph_func_0
+from animations.lens_graph_1 import lens_graph_func_1
+from animations.lens_graph_2 import lens_graph_func_2
