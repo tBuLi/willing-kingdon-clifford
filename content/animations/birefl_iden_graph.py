@@ -18,15 +18,18 @@ rlines = list(zip(_rpoints1, points1))
 
 def birefl_iden_graph_func():   
     return [
+        L1,
         clrs[0],
         *shape,
-        L1,
-        clrs[2],
+        clrs[1],
         *rshape,
         '<G stroke-width="0.002">',clrs[0],
         *rlines,
         '</G>',
-        '<G stroke-dasharray="0.4 0.4">', clrs[2],
+        '<G stroke-dasharray="0.2 0.2">', clrs[2],
+        *shape,
+        '</G>',
+        '<G stroke-dasharray="0.2 0.2">', 0xbbbbbb,
         L1,
         '</G>',
     ]

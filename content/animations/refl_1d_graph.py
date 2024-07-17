@@ -87,7 +87,7 @@ def refl_1d_graph_func_3():
     if t0 is None:
         t0 = timeit.default_timer()
     t = timeit.default_timer() - t0
-    if t > 10:
+    if t > 30:
         t0 = None
 
     omega = -min(t / 25, np.pi / 20)
