@@ -29,7 +29,7 @@ def birefl_point_graph_func():
     global t0
     if t0 is None:
         t0 = timeit.default_timer()
-    t = np.sin((timeit.default_timer() - t0))  / 25
+    t = np.sin((timeit.default_timer() - t0)) / 50
     R = np.cos(t) + np.sin(t) * axis
     L1p, L2p = R >> L1, R >> L2
     # Reflect the points in lines once and then once more.
