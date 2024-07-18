@@ -18,6 +18,7 @@ L3 = alg3d.vector(e1=1, e0=0.5).normalized() ^ PLANE
 # Gauge degree in bireflections animation. # TODO: Show both rotation and translation.
 def _birefl_gauge_func(L1, L2):   
     intersection = L1.cp(L2)
+    intersectionpoint = intersection ^ PLANE
     if not intersection**2:
         R = lambda t: 1 + intersection*np.sin(5*t)
     else:
@@ -39,9 +40,10 @@ def _birefl_gauge_func(L1, L2):
         rrlines = zip(rpoints1, rrpoints1)
         
         return [
-            '<G stroke-opacity="0.4">', clrs[-1],
+            '<G stroke-opacity="0.4" fill-opacity="0.4">', clrs[-1],
             L1p,
             L2p,
+            intersectionpoint,
             '</G>',
             clrs[0],
             *shape, 

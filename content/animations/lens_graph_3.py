@@ -12,13 +12,17 @@ focal = alg3d.vector(e0=1, e1=-0.8, e2=0, e3=0).dual()  # Focal point of the len
 center = center_point = alg3d.vector(e0=1, e1=0, e2=0, e3=0).dual()  # Center of the lens
 world = alg3d.vector(e0=1, e1=-2, e2=-1, e3=0).dual() # World to image
 
+# Cylindrical lens
+center = center | PLANE
+focal = focal | PLANE
+
 wf = lambda: world & focal
 wc = lambda: world & center
 wfl = lambda: wf ^ lens  # world on lens through focal
 wfl_dot_l = lambda: wfl | (center_point & wfl)
 img = lambda: alg3d.op(wfl_dot_l, wc)
 
-def lens_graph_func_1():
+def lens_graph_func_3():
     return [
         axis, 
         clrs[2],

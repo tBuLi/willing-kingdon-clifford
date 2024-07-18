@@ -19,3 +19,4 @@ from animations.birefl_point_graph import birefl_point_graph_func
 from animations.lens_graph_0 import lens_graph_func_0
 from animations.lens_graph_1 import lens_graph_func_1
 from animations.lens_graph_2 import lens_graph_func_2
+from animations.lens_graph_3 import lens_graph_func_3
