@@ -8,7 +8,7 @@ L1 = alg3d.vector(e1=1).normalized() ^ PLANE
 L2 = alg3d.vector(e1=1, e2=0.5).normalized() ^ PLANE
 intersection = L1.cp(L2)
 
-sw_slider = ipy.FloatSlider(
+proj_slider = ipy.FloatSlider(
     value=0.0,
     min=-1.0,
     max=1.0,
@@ -21,8 +21,8 @@ sw_slider = ipy.FloatSlider(
     readout_format='.1f',
 )
 
-def sw_graph_func():
-    if sw_slider.value == 0.0:
+def proj_graph_func():
+    if proj_slider.value == 0.0:
         return [
             clrs[0],
             L1, 'a',
@@ -32,8 +32,8 @@ def sw_graph_func():
             L1, "a'",
             '</G>',
         ]
-    elif sw_slider.value < 1.0:
-        t = np.arccos((L1 | L2).e) * sw_slider.value
+    elif proj_slider.value < 1.0:
+        t = np.arccos((L1 | L2).e) * proj_slider.value
         R = np.cos(t / 2) + intersection*np.sin(t / 2)
         L2p = R >> L2
         L1p = R >> L1

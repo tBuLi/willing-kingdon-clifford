@@ -86,8 +86,11 @@ def refl_1d_graph_func_3():
     global t0
     if t0 is None:
         t0 = timeit.default_timer()
+    t = timeit.default_timer() - t0
+    if t > 30:
+        t0 = None
 
-    omega = -min((timeit.default_timer() - t0) / 25, np.pi / 20)
+    omega = -min(t / 25, np.pi / 20)
     R = np.cos(omega) + line * np.sin(omega)
     
     return [
