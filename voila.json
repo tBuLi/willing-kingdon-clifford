@@ -5,7 +5,8 @@
     "resources": {
       "reveal": {
         "scroll": false,
-        "theme": "simple"
+        "theme": "simple",
+        "url_prefix": "https://unpkg.com/reveal.js@5.1.0"
       }
     }
   }

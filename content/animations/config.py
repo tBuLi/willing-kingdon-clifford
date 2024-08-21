@@ -1,6 +1,7 @@
 from kingdon import Algebra
 
 alg3d = Algebra(3, 0, 1)
+alg2d = Algebra(2, 0, 1)
 options = dict(
     lineWidth=4,
     pointRadius=2.5,
