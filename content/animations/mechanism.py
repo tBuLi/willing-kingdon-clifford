@@ -138,3 +138,22 @@ def graph_mechanism_func():
         clrs[8], *[points[i] for i in mechanism.motor_indices],
         clrs[7], *[points[i] for i in mechanism.end_indices],
     ]
+
+
+def graph_usecase_func():
+    return [
+        clrs[2], *itertools.chain(*zip(target_points, ['X', 'Y', 'Z'])),
+    ]
+
+def graph_guess_func():
+    return [
+        clrs[2], *itertools.chain(*zip(target_points, ['X', 'Y', 'Z'])),
+        '<G  stroke-width=0.02 stroke-dasharray="0.1" stroke-opacity="0.2" fill-opacity="0.2">',
+        0x000000,
+        *lines(points, pairs),
+        '</G>',
+        0x000000, 
+        *itertools.chain(*zip(points, ['A', 'B', 'C', 'D', 'E'])),
+        clrs[8], *[points[i] for i in mechanism.motor_indices],
+        clrs[7], *[points[i] for i in mechanism.end_indices],
+    ]

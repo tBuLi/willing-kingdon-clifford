@@ -21,4 +21,4 @@ from animations.lens_graph_1 import lens_graph_func_1
 from animations.lens_graph_2 import lens_graph_func_2
 from animations.lens_graph_3 import lens_graph_func_3
 from animations.pointcloud import graph_pc_func
-from animations.mechanism import graph_mechanism_func
+from animations.mechanism import graph_mechanism_func, graph_usecase_func, graph_guess_func
