@@ -6,7 +6,7 @@ from .config import alg3d, clrs, PLANE, ORIGIN
 
 L1 = alg3d.vector(e1=1).normalized() ^ PLANE
 L2 = alg3d.vector(e1=1, e2=0.5).normalized() ^ PLANE
-intersection = L1.cp(L2)
+intersection = L1.cp(L2).normalized()
 
 sw_slider = ipy.FloatSlider(
     value=0.0,
@@ -33,7 +33,7 @@ def sw_graph_func():
             '</G>',
         ]
     elif sw_slider.value < 1.0:
-        t = np.arccos((L1 | L2).e) * sw_slider.value
+        t = np.arctan2((L1 ^ L2).e12, (L1 | L2).e) * sw_slider.value
         R = np.cos(t / 2) + intersection*np.sin(t / 2)
         L2p = R >> L2
         L1p = R >> L1
@@ -47,6 +47,8 @@ def sw_graph_func():
             L1p, "a'",
         ]
     else:
+        # t = np.arctan2((L1 ^ L2).e12, (L1 | L2).e) * sw_slider.value
+        # R = np.cos(t / 2) + intersection*np.sin(t / 2)
         R = (L1 * L2).sqrt()
         L2p = R >> L2
         L1p = R >> L1
