@@ -4,9 +4,9 @@ import ipywidgets as ipy
 
 from .config import alg3d, clrs, PLANE, ORIGIN
 
-L1 = alg3d.vector(e1=1).normalized() ^ PLANE
-L2 = alg3d.vector(e1=1, e2=0.5).normalized() ^ PLANE
-intersection = L1.cp(L2)
+p = alg3d.vector(e0=1, e1=-1).dual()
+l = alg3d.vector(e0=-1, e1=1, e2=1).normalized() ^ PLANE
+l1, l2, axis = p | [alg3d.blades.e1, alg3d.blades.e2, alg3d.blades.e3]
 
 proj_slider = ipy.FloatSlider(
     value=0.0,
@@ -21,45 +21,64 @@ proj_slider = ipy.FloatSlider(
     readout_format='.1f',
 )
 
+proj_selector = ipy.Dropdown(
+    options=[('a.b', 1), ('(a.b)b', 2), ('(a.b)a', 3)],
+    value=1,
+    description='Display:',
+    disabled=False,
+)
+
 def proj_graph_func():
-    if proj_slider.value == 0.0:
+    if proj_selector.value != 1:
+        proj_slider.value = 0.5
+    R = np.cos(0.25*np.pi*proj_slider.value) + axis*np.sin(0.25*np.pi*proj_slider.value)
+    l1p, l2p = R >> [l1, l2]
+
+    if proj_selector.value == 1:
+        if abs((l2p | l).e) < 1e-3:
+            return [
+                clrs[0],
+                '<G stroke-opacity="0.2" fill-opacity="0.2">',
+                l1p, p, 'a',
+                '</G>',
+                l2p, 'a.b',
+                clrs[2],
+                '<G stroke-opacity="0.2" fill-opacity="0.2">',
+                l, 'b',
+                '</G>',
+            ]
         return [
             clrs[0],
-            L1, 'a',
+            l1p, l2p,
+            p, 'a',
             clrs[2],
-            L2, "b'",
-            '<G stroke-dasharray="0.1 0.1">', clrs[1],
-            L1, "a'",
-            '</G>',
+            l,
+            "b",
         ]
-    elif proj_slider.value < 1.0:
-        t = np.arccos((L1 | L2).e) * proj_slider.value
-        R = np.cos(t / 2) + intersection*np.sin(t / 2)
-        L2p = R >> L2
-        L1p = R >> L1
-        
+    elif proj_selector.value == 2:
         return [
             clrs[0],
-            L1, 'a',
+            '<G stroke-opacity="0.2" fill-opacity="0.2">',
+            l1p, p, 'a',
+            '</G>',
+            l2p,
             clrs[2],
-            L2p, "b'",
-            clrs[1],
-            L1p, "a'",
+            l,
+            '<G stroke-opacity="0.2" fill-opacity="0.2">',
+            'b',
+            '</G>',
+            (l2p.cp(l) ^ PLANE), '(a.b)b'
         ]
     else:
-        R = (L1 * L2).sqrt()
-        L2p = R >> L2
-        L1p = R >> L1
-        
         return [
-            '<G fill-opacity="0.3" stroke-opacity="0.1">', 
             clrs[0],
-            L1, 'a',
+            l1p, '(a.b)a',
+            '<G stroke-opacity="0.2" fill-opacity="0.2">',
+            l2p, p, 'a',
             '</G>',
-            '<G stroke-opacity="0.3" fill-opacity="0.3" stroke-dasharray="0.1 0.1">', 
             clrs[2],
-            L2p, "b'",
+            '<G stroke-opacity="0.2" fill-opacity="0.2">',
+            l, 'b',
             '</G>',
-            clrs[0],
-            L1p, "a'",
         ]
+        

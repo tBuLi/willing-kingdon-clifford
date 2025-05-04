@@ -11,7 +11,7 @@ from animations.birefl_gauge import (
     birefl_gauge_rot_func,
     birefl_gauge_trans_func
 )
-from animations.points_gp_graph import points_gp_graph_func
+from animations.points_gp_graph import points_gp_graph_func, points_gp_graph_func_3d
 from animations.sw_graph import sw_graph_func
 from animations.proj_graph import proj_graph_func
 from animations.birefl_iden_graph import birefl_iden_graph_func
