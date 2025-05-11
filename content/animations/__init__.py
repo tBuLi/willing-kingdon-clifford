@@ -20,15 +20,15 @@ from animations.lens_graph_0 import lens_graph_func_0
 from animations.lens_graph_1 import lens_graph_func_1
 from animations.lens_graph_2 import lens_graph_func_2
 from animations.lens_graph_3 import lens_graph_func_3
-# from animations.lens_graph_intro import (
-#     lens_graph_intro_func_0, 
-#     lens_graph_intro_func_1,
-#     lens_graph_intro_func_2,
-#     lens_graph_intro_func_3,
-#     lens_graph_intro_func_4,
-#     lens_graph_intro_func_5,
-#     lens_graph_intro_func_6,
-# )
+from animations.lens_graph_intro import (
+    lens_graph_intro_func_0, 
+    lens_graph_intro_func_1,
+    lens_graph_intro_func_2,
+    lens_graph_intro_func_3,
+    lens_graph_intro_func_4,
+    lens_graph_intro_func_5,
+    lens_graph_intro_func_6,
+)
 from animations.pointcloud import graph_pc_func
 from animations.mechanism import graph_mechanism_func, graph_usecase_func, graph_guess_func
 from animations.sqrt_graph import (

@@ -22,7 +22,7 @@ proj_slider = ipy.FloatSlider(
 )
 
 proj_selector = ipy.Dropdown(
-    options=[('a.b', 1), ('(a.b)b', 2), ('(a.b)a', 3)],
+    options=[('a⋅b', 1), ('(a⋅b)b', 2), ('(a⋅b)a', 3)],
     value=1,
     description='Display:',
     disabled=False,
@@ -41,7 +41,7 @@ def proj_graph_func():
                 '<G stroke-opacity="0.2" fill-opacity="0.2">',
                 l1p, p, 'a',
                 '</G>',
-                l2p, 'a.b',
+                l2p, 'a⋅b',
                 clrs[2],
                 '<G stroke-opacity="0.2" fill-opacity="0.2">',
                 l, 'b',
@@ -67,12 +67,12 @@ def proj_graph_func():
             '<G stroke-opacity="0.2" fill-opacity="0.2">',
             'b',
             '</G>',
-            (l2p.cp(l) ^ PLANE), '(a.b)b'
+            (l2p.cp(l) ^ PLANE), '(a⋅b)b'
         ]
     else:
         return [
             clrs[0],
-            l1p, '(a.b)a',
+            l1p, '(a⋅b)a',
             '<G stroke-opacity="0.2" fill-opacity="0.2">',
             l2p, p, 'a',
             '</G>',
