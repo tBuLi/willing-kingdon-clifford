@@ -21,7 +21,11 @@ from animations.lens_graph_1 import lens_graph_func_1
 from animations.lens_graph_2 import lens_graph_func_2
 from animations.lens_graph_3 import lens_graph_func_3
 from animations.lens_graph_intro import (
-    lens_graph_intro_func_0, 
+    lens_graph_intro_func_0,
+    lens_graph_intro_func_01,
+    lens_graph_intro_func_02,
+    lens_graph_intro_func_03,
+    lens_graph_intro_func_04,
     lens_graph_intro_func_1,
     lens_graph_intro_func_2,
     lens_graph_intro_func_3,
