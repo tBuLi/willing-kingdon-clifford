@@ -41,3 +41,6 @@ from animations.sqrt_graph import (
     sqrt_graph_func_2,
     sqrt_graph_func_3
 )
+from animations.relativity.velocity import addition_of_velocity, addition_of_velocity_rot
+from animations.relativity.birefl_gauge_boost import birefl_gauge_boost_func
+from animations.relativity.triangle import journey
