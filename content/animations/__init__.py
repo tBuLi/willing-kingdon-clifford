@@ -45,3 +45,7 @@ from animations.relativity.velocity import addition_of_velocity, addition_of_vel
 from animations.relativity.birefl_gauge_boost import birefl_gauge_boost_func
 from animations.relativity.birefl_boost import birefl_boost_func
 from animations.relativity.triangle import journey
+from animations.relativity.synchronize import (
+    synchronize_0, synchronize_1, synchronize_2, synchronize_3,
+synchronize_4, synchronize_5
+)

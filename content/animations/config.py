@@ -31,3 +31,19 @@ clrs = [
 # clrs = [0xff9900, 0xfed290, 0x009977, 0x000000]
 PLANE = alg3d.vector(e3=1)
 ORIGIN = alg3d.blades.e0.dual() | PLANE
+
+def arrow( from_point, to_point, w=0.03, aspect=0.8, camera=1):
+    alg = from_point.algebra
+    e0 = alg.blades.e0
+    from_point = from_point/(-from_point|e0.dual())
+    to_point = to_point/(-to_point|e0.dual())
+    line = ( from_point & to_point )
+    l = line.norm().e
+    shape = [
+        alg.vector(e0=1, e1=x, e2=y).dual()
+        for x, y in [[0,w],[l-5*w,w],[l-5*w,aspect*5*w],[l,0],[l-5*w,-aspect*5*w],[l-5*w,-w],[0,-w]]
+    ]
+    sqrt = lambda R: alg.blades.e12 if abs(R.e + 1.0) < 1e-8 else (1+R).normalized()
+    R = ((to_point - from_point).undual()).normalized() * alg.blades.e1
+    R2 = sqrt(from_point/e0.dual()) * sqrt(R.filter())
+    return R2 >> shape
