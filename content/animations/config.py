@@ -3,7 +3,7 @@ from kingdon import Algebra
 alg3d = Algebra(3, 0, 1)
 alg2d = Algebra(2, 0, 1)
 ltap = Algebra(signature=[0, -1, 1])
-# ptap = Algebra(signature=[0, 1, -1])
+# ltap = Algebra(signature=[0, 1, -1])
 ptap = Algebra(signature=[0, -1, -1, 1])
 stap = Algebra(signature=[0, -1, -1, -1, 1])
 # ptap = Algebra(signature=[0, -1, 1], basis=['e', 'e0', 'e2', 'e1', 'e01', 'e02', 'e12', 'e012'])

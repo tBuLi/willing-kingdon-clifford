@@ -24,8 +24,9 @@ def normalized(x):
 # L1 = normalized(alg.vector(e1=-0.2, e2=1.))
 # # L2 = alg.blades.e12 | L1
 # L2 = normalized(alg.vector(e1=0.2, e2=1.))
-L1 = normalized(alg.vector(e1=1, e2=-0.2))
-L2 = normalized(alg.vector(e1=1, e2=0.2))
+L1 = normalized(alg.vector(e1=1))
+L2 = alg.blades.e12 | L1
+# L2 = normalized(alg.vector(e1=1, e2=0.2))
 intersection = L1.cp(L2)
 R = lambda t: np.cosh(t) + intersection*np.sinh(t)
 ep, em = alg.vector(e1=1, e2=1), alg.vector(e1=1, e2=-1)
@@ -37,8 +38,8 @@ Rs = R(np.linspace(-2, 3, 30))
 hyperbola_points = Rs >> hyperbola_seed
 hyperbola = list(zip(hyperbola_points[1:], hyperbola_points[:-1]))
 
-def birefl_gauge_boost_func():
-    t = np.sin(timeit.default_timer() / 2) + 0.5
+def birefl_boost_func():
+    t = 0.1 * np.sin(timeit.default_timer() / 2)
     # t=0.
     L1p = R(t) >> L1
     L2p = R(t) >> L2
@@ -60,8 +61,8 @@ def birefl_gauge_boost_func():
         *hyperbola,
         '</G>',
         '<G stroke-opacity="0.4" fill-opacity="0.4">', clrs[-1],
-        L1p, '1',
-        L2p, '2',
+        L1p,
+        L2p,
         intersection,
         '</G>',
         clrs[0],
