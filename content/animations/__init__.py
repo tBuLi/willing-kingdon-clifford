@@ -47,5 +47,6 @@ from animations.relativity.birefl_boost import birefl_boost_func
 from animations.relativity.triangle import journey
 from animations.relativity.synchronize import (
     synchronize_0, synchronize_1, synchronize_2, synchronize_3,
-synchronize_4, synchronize_5
+    synchronize_4, synchronize_5, synchronize_6, synchronize_7,
+    synchronize_8, synchronize_9, synchronize_10,
 )
