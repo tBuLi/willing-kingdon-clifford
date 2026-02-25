@@ -27,7 +27,7 @@ def normalized(x):
 L1 = normalized(alg.vector(e1=1, e2=-0.2))
 L2 = normalized(alg.vector(e1=1, e2=0.2))
 intersection = L1.cp(L2)
-R = lambda t: np.cosh(t) + intersection*np.sinh(t)
+R = lambda t: np.cosh(t) + np.sinh(t)*intersection
 ep, em = alg.vector(e1=1, e2=1), alg.vector(e1=1, e2=-1)
 
 boost = normalized(1 + alg.blades.e1 / normalized(points1[2] & alg.blades.e0.dual()))

@@ -12,20 +12,27 @@ x_label = alg.vector(e0=1, e1=1.8, e2=-0.3).dual()
 master_clock = alg.vector(e0=1, e1=-0.12, e2=-0.16).dual()
 ep, em = alg.vector(e1=1, e2=1), alg.vector(e1=1, e2=-1)
 
-N_clocks = 5
-T_x = alg.evenmv(e=np.ones(N_clocks), e01=0.5*np.linspace(-1, 1, N_clocks))
-T_t = alg.evenmv(e=np.ones(N_clocks), e02=0.5*np.linspace(-1, 1, N_clocks))
+clock_labels_1 = ["⌛", "⌛", "⌛", "⌛", "🕛", "⌛", "⌛", "⌛", "⌛"]
+clock_labels_2 = ["⌛", "⌛", "⌛", "⌛", "🕐", "⌛", "⌛", "⌛", "⌛"]
+clock_labels_3 = ["⌛", "⌛", "⌛", "🕐", "🕐", "🕐", "⌛", "⌛", "⌛"]
+clock_labels_4 = ["⌛", "⌛", "⌛", "🕑", "🕑", "🕑", "⌛", "⌛", "⌛"]
+clock_labels_5 = ["⌛", "⌛", "🕑", "🕑", "🕑", "🕑", "🕑", "⌛", "⌛"]
+N_clocks = len(clock_labels_1)
+T_x = alg.evenmv(e=np.ones(N_clocks), e01=0.5*np.linspace(-2, 2, N_clocks))
+T_t = alg.evenmv(e=np.ones(N_clocks), e02=0.5*np.linspace(-2, 2, N_clocks))
 clocks = T_x >> master_clock
-clock_labels_1 = ["⏳", "⏳", "🕛", "⏳", "⏳"]
-clock_labels_2 = ["⏳", "🕐", "🕐", "🕐", "⏳"]
-clock_labels_3 = ["🕑", "🕑", "🕑", "🕑", "🕑"]
 
 wl1 = -alg.blades.e1
 wl2 = normalized(-alg.vector(e1=1, e2=-0.4))
-wl1_label = alg.vector(e0=1, e1=-0.1, e2=1.4).dual()
-wl2_label = alg.vector(e0=1, e1=1.8, e2=-0.3).dual()
+wl1_label = alg.vector(e0=1, e1=-0.2, e2=1.4).dual()
+wl2_label = alg.vector(e0=1, e1=0.7, e2=1.4).dual()
 bisector = normalized(wl1+wl2)
 boost = bisector * wl2
+
+# firework1 = alg.vector(e0=1, e1=1.38, e2=-0.16).dual()
+# firework2 = alg.vector(e0=1, e1=-1.62, e2=-0.16).dual()
+firework1 = alg.vector(e0=1, e1=-1.5).dual()
+firework2 = alg.vector(e0=1, e1=1.5).dual()
 
 def synchronize_base():
     return [
@@ -47,7 +54,7 @@ def synchronize_1(clock_labels=clock_labels_1, translation=1):
         0xffffff, *itertools.chain(*((c, label) for c, label in zip(translation >> clocks, clock_labels)))
     ]
 
-def synchronize_2(clock_labels=clock_labels_1, translation=alg.evenmv(e=1, e02=-0.25)):
+def synchronize_2(clock_labels=clock_labels_2, translation=alg.evenmv(e=1, e02=-0.25)):
     ray1 = [alg.blades.e0.dual(), alg.vector(e0=1, e1=0.5, e2=0.5).dual()]
     ray2 = [alg.blades.e0.dual(), alg.vector(e0=1, e1=-0.5, e2=0.5).dual()]
     return [
@@ -59,14 +66,14 @@ def synchronize_2(clock_labels=clock_labels_1, translation=alg.evenmv(e=1, e02=-
 
 def synchronize_3():
     return [
-        *synchronize_2(clock_labels=clock_labels_2)
+        *synchronize_2(clock_labels=clock_labels_3)
     ]
 
 def synchronize_4():
     ray1 = [alg.blades.e0.dual(), alg.vector(e0=1, e1=1, e2=1).dual()]
     ray2 = [alg.blades.e0.dual(), alg.vector(e0=1, e1=-1, e2=1).dual()]
     return [
-        *synchronize_2(clock_labels=clock_labels_2, translation=alg.evenmv(e=1, e02=-0.5)),
+        *synchronize_2(clock_labels=clock_labels_4, translation=alg.evenmv(e=1, e02=-0.5)),
         '<G stroke-dasharray="0.03 0.03">',
         clrs[2], ray1, ray2,
         '</G>',
@@ -76,7 +83,7 @@ def synchronize_5():
     ray1 = [alg.blades.e0.dual(), alg.vector(e0=1, e1=1, e2=1).dual()]
     ray2 = [alg.blades.e0.dual(), alg.vector(e0=1, e1=-1, e2=1).dual()]
     return [
-        *synchronize_2(clock_labels=clock_labels_3, translation=alg.evenmv(e=1, e02=-0.5)),
+        *synchronize_2(clock_labels=clock_labels_5, translation=alg.evenmv(e=1, e02=-0.5)),
         '<G stroke-dasharray="0.03 0.03">',
         clrs[2], ray1, ray2,
         '</G>',
@@ -98,7 +105,7 @@ def synchronize_6():
     axes_x, axes_t = make_grid((-1.5, 1.5), (-1.5, 1.5), 7)
     return [
         '<G stroke-opacity="0.3">',
-        clrs[4],
+        clrs[1],
         *axes_x,
         *axes_t,
         '</G>',
@@ -111,24 +118,38 @@ def synchronize_6():
 def synchronize_7():
     return [
         *synchronize_6(),
-        '<G stroke-width="0.03" fill-opacity="0.003">',
-        wl1, wl1_label,
+        '<G stroke-width="0.03" fill-opacity="0.001">',
+        clrs[0], wl1, wl1_label,
         '</G>',	
-         "ℓ₁",
+         "ℓ",
     ]
 
 def synchronize_8():
     return [
-        *synchronize_6(),
-        '<G stroke-width="0.03">',
-        clrs[4], wl1, "ℓ",
-        clrs[6], wl2, "ℓ'",
-        '</G>',	
+        *synchronize_7(),
+        '<G stroke-width="0.03" fill-opacity="0.001">',
+        clrs[2], wl2, wl2_label,
+        '</G>',
+        "ℓ'",
     ]
 
 def synchronize_9():
     return [
         *synchronize_8(),
+        0,
+        '<G stroke-width="0.03" fill-opacity="1.0">',
+        firework1,
+        '</G>',
+        "1", 
+        '<G stroke-width="0.03" fill-opacity="1.0">',
+        firework2,
+        '</G>',
+        "2",
+    ]
+
+def synchronize_10():
+    return [
+        *synchronize_9(),
         0,
         '<G stroke-width="0.03" stroke-dasharray="0.03 0.03">',
         bisector, 
@@ -136,14 +157,20 @@ def synchronize_9():
         '</G>',	
     ]
 
-def synchronize_10():
+def synchronize_11():
     axes_x, axes_t = make_grid((-1.5, 1.5), (-1.5, 1.5), 7)
     return [
-        *synchronize_8(),
-        '<G stroke-opacity="0.3">',
-        clrs[6],
+        *synchronize_9(),
+        '<G stroke-opacity="0.6">',
+        clrs[3],
         *(~boost >> axes_x), 
         *(~boost >> axes_t), 
         # "ℓ₁ + ℓ₂",
         '</G>',	
     ]
+
+def synchronize_12(t):
+    # axes_x, axes_t = make_grid((-1.5, 1.5), (-1.5, 1.5), 7)
+    t = min(t, 1.0)
+    L = (-t*boost.grade(2)).exp()
+    return [x if isinstance(x, (int, float, str)) else L >> x for x in synchronize_11()]
