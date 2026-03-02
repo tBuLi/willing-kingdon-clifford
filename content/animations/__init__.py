@@ -41,7 +41,7 @@ from animations.sqrt_graph import (
     sqrt_graph_func_2,
     sqrt_graph_func_3
 )
-from animations.relativity.velocity import addition_of_velocity, addition_of_velocity_rot
+from animations.relativity.velocity import addition_of_velocity, addition_of_velocity_spaceship
 from animations.relativity.birefl_gauge_boost import birefl_gauge_boost_func
 from animations.relativity.birefl_boost import birefl_boost_func
 from animations.relativity.triangle import journey
@@ -49,5 +49,8 @@ from animations.relativity.synchronize import (
     synchronize_0, synchronize_1, synchronize_2, synchronize_3,
     synchronize_4, synchronize_5, synchronize_6, synchronize_7,
     synchronize_8, synchronize_9, synchronize_10, synchronize_11, synchronize_12,
+time_dilation_0,
+time_dilation_1,
+time_dilation_2,
 )
 from animations.relativity.elements import elements_events, elements_world_lines, elements_world_planes, elements_bireflections

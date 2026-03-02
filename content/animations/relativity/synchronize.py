@@ -22,7 +22,7 @@ T_x = alg.evenmv(e=np.ones(N_clocks), e01=0.5*np.linspace(-2, 2, N_clocks))
 T_t = alg.evenmv(e=np.ones(N_clocks), e02=0.5*np.linspace(-2, 2, N_clocks))
 clocks = T_x >> master_clock
 
-wl1 = -alg.blades.e1
+wl1 = normalized(-alg.blades.e1)
 wl2 = normalized(-alg.vector(e1=1, e2=-0.4))
 wl1_label = alg.vector(e0=1, e1=-0.2, e2=1.4).dual()
 wl2_label = alg.vector(e0=1, e1=0.7, e2=1.4).dual()
@@ -100,9 +100,11 @@ def make_grid(x_limits, t_limits, N_lines=5):
     axes_t = [T >> axis_t for T in T_x]
     return axes_x, axes_t
 
+axes_x, axes_t = make_grid((-1.5, 1.5), (-1.5, 1.5), 7)
+axes_xp, axes_tp = (~boost >> axes_x), (~boost >> axes_t) 
+
 def synchronize_6():
     """ Show the resulting grid """
-    axes_x, axes_t = make_grid((-1.5, 1.5), (-1.5, 1.5), 7)
     return [
         '<G stroke-opacity="0.3">',
         clrs[1],
@@ -158,19 +160,53 @@ def synchronize_10():
     ]
 
 def synchronize_11():
-    axes_x, axes_t = make_grid((-1.5, 1.5), (-1.5, 1.5), 7)
     return [
         *synchronize_9(),
         '<G stroke-opacity="0.6">',
         clrs[3],
-        *(~boost >> axes_x), 
-        *(~boost >> axes_t), 
+        *axes_xp, 
+        *axes_tp, 
         # "ℓ₁ + ℓ₂",
         '</G>',	
     ]
 
 def synchronize_12(t):
-    # axes_x, axes_t = make_grid((-1.5, 1.5), (-1.5, 1.5), 7)
     t = min(t, 1.0)
     L = (-t*boost.grade(2)).exp()
     return [x if isinstance(x, (int, float, str)) else L >> x for x in synchronize_11()]
+
+
+# TIME DILATION
+scene_time_dilation_prime = [
+    *synchronize_8(),
+    '<G stroke-opacity="0.6">',
+    clrs[3],
+    *axes_xp,
+    *axes_tp,
+    '</G>',	
+]
+scene_time_dilation_prime = [x if isinstance(x, (int, float, str)) else boost >> x for x in scene_time_dilation_prime]
+tick1p, tick2p = alg.vector(e0=1, e1=0, e2=1.0).dual(), alg.vector(e0=1, e1=0, e2=0.0).dual()
+def time_dilation_0():
+    return [
+        *scene_time_dilation_prime,
+        0, [tick1p, tick2p], 'T',
+        clrs[3], tick1p, tick2p,
+    ]
+
+def time_dilation_1(t):
+    t = min(t, 1.0)
+    L = (t*boost.grade(2)).exp()
+    return [x if isinstance(x, (int, float, str)) else L >> x for x in time_dilation_0()]
+
+scene_time_dilation = [x if isinstance(x, (int, float, str)) else ~boost >> x for x in time_dilation_0()]
+tick1, tick2 = ~boost >> [tick1p, tick2p]
+mark1 = tick1 @ wl1
+mark2 = tick2 @ wl1
+def time_dilation_2():
+    return [
+        *scene_time_dilation,
+        0, [mark2, mark1], "T'",
+        clrs[1],
+        mark1,
+    ]
