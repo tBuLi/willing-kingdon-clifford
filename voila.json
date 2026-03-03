@@ -1,14 +1,19 @@
 {
   "VoilaConfiguration": {
     "template": "reveal",
-    "theme": "light",
+    "theme": "dark",
     "resources": {
       "reveal": {
         "scroll": false,
-        "theme": "simple",
+        "theme": "dracula",
         "url_prefix": "https://unpkg.com/reveal.js@5.1.0"
       }
     },
     "file_allowlist": [".*"]
+  },
+  "ServerApp": {
+    "tornado_settings": {
+      "static_path": "."
+    }
   }
 }
