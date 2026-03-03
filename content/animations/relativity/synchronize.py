@@ -28,6 +28,7 @@ wl1_label = alg.vector(e0=1, e1=-0.2, e2=1.4).dual()
 wl2_label = alg.vector(e0=1, e1=0.7, e2=1.4).dual()
 bisector = normalized(wl1+wl2)
 boost = bisector * wl2
+lorentz_factor = -wl1|wl2
 
 # firework1 = alg.vector(e0=1, e1=1.38, e2=-0.16).dual()
 # firework2 = alg.vector(e0=1, e1=-1.62, e2=-0.16).dual()
@@ -178,6 +179,8 @@ def synchronize_12(t):
 
 # TIME DILATION
 scene_time_dilation_prime = [
+    '',
+    f'γ={lorentz_factor}',
     *synchronize_8(),
     '<G stroke-opacity="0.6">',
     clrs[3],
@@ -186,12 +189,12 @@ scene_time_dilation_prime = [
     '</G>',	
 ]
 scene_time_dilation_prime = [x if isinstance(x, (int, float, str)) else boost >> x for x in scene_time_dilation_prime]
-tick1p, tick2p = alg.vector(e0=1, e1=0, e2=1.0).dual(), alg.vector(e0=1, e1=0, e2=0.0).dual()
+tick1p, tick2p = alg.vector(e0=1, e1=0, e2=1).dual(), alg.vector(e0=1, e1=0, e2=0).dual()
 def time_dilation_0():
     return [
         *scene_time_dilation_prime,
         0, [tick1p, tick2p], 'T',
-        clrs[3], tick1p, tick2p,
+        clrs[3], tick1p, f' {2*tick1p.e01:.2f}', tick2p,
     ]
 
 def time_dilation_1(t):
@@ -208,5 +211,5 @@ def time_dilation_2():
         *scene_time_dilation,
         0, [mark2, mark1], "T'",
         clrs[1],
-        mark1,
+        mark1, f'{-2*mark1.e01:.2f}',
     ]
