@@ -44,20 +44,21 @@ def birefl_point_graph_func():
     rrlines = list(zip(rpoints1, rrpoints1))
 
     return [
+        clrs[-3],
         p1,
         L1p, 
         L2p,
-        clrs[0],
+        clrs[4],
         *shape,
-        clrs[2],
+        clrs[5],
         *pshape,
         *rrshape,
-        '<G stroke-width="0.002">',clrs[0],
+        '<G stroke-width="0.002">',clrs[5],
         *plines,
         *rlines,
         *rrlines,
         '</G>',
-        '<G stroke-dasharray="0.02 0.02">', clrs[1],
+        '<G stroke-dasharray="0.02 0.02">', clrs[4],
         *rshape,
         '</G>',
     ]

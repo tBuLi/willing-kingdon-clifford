@@ -71,21 +71,21 @@ def points_gp_graph_func():
     _p2 = p2
     if abs((_p1plane1 ^ _p2).dual().e) < 1e-3 and abs((_p2plane1 ^ _p1).dual().e) < 1e-3:
         return [
-            clrs[0],
+            clrs[4],
             _p1l2, _p1, 'a',
             '<G stroke-opacity="0.1">',
             _p1l1,
             '</G>',
-            clrs[2],
+            clrs[5],
             _p2l2, _p2, "b",
             '<G stroke-dasharray="0.1 0.1" stroke-opacity="0.1">',
             _p2l1,
             '</G>',
         ]
     return [
-        clrs[0],
+        clrs[4],
         _p1l1, _p1l2, _p1, 'a',
-        clrs[2],
+        clrs[5],
         _p2l1, _p2l2, _p2, "b",
     ]
 
@@ -100,24 +100,24 @@ def points_gp_graph_func_3d():
     if abs((_p1plane1 ^ p2).dual().e) < 1e-3 and abs((_p2plane1 ^ p1).dual().e) < 1e-3:
         return [
             '<G fill-opacity="0.1">',
-            clrs[0],
+            clrs[4],
             *c1[2:], 
             '</G>',
             *c1[:2], p1, 'a',
             '<G fill-opacity="0.1">',
-            clrs[2],
+            clrs[5],
             *c2[2:],
             '</G>',
             *c2[:2], p2, "b",
         ]
     return [
         '<G fill-opacity="0.6">',
-        clrs[0],
+        clrs[4],
         *c1, 
         '</G>',
         p1, 'a',
         '<G fill-opacity="0.6">',
-        clrs[2],
+        clrs[5],
         *c2,
         '</G>',
         p2, "b",

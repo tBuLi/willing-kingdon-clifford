@@ -21,14 +21,13 @@ options = dict(
 animated_options = dict(animate=1, **options)
 science_options = dict(grid=1, labels=1, **options)
 clrs = [
-    0x1F91CA, 0x57BFED,  # blue
-    0xF69B28, 0xFEC074,  # orange
-    0x0C3353, 0x1A5B8F,  # navy
-    0x34BAC4, 0x82DFE4,  # Cyan
-    0xBF0E1C, 0xEA575C,  # Red
-    0x640021, 0x941F4B,  # Purple
-    0x000000
-]  # ECM colors
+    0x8BE9FD, 0x50FA7B,  # cyan, green
+    0xFFB86C, 0xF1FA8C,  # orange, yellow
+    0xFF79C6, 0xBD93F9,  # pink, purple
+    0xFF5555, 0x6272A4,  # red, comment
+    0xF8F8F2, 0x44475A,  # foreground, current line
+    0x282A36             # background
+]  # Dracula colors
 # clrs = [0xff9900, 0xfed290, 0x009977, 0x000000]
 PLANE = alg3d.vector(e3=1)
 ORIGIN = alg3d.blades.e0.dual() | PLANE

@@ -40,21 +40,21 @@ def _birefl_gauge_func(L1, L2):
         rrlines = zip(rpoints1, rrpoints1)
         
         return [
-            '<G stroke-opacity="0.4" fill-opacity="0.4">', clrs[-1],
+            '<G stroke-opacity="0.4" fill-opacity="0.4">', clrs[-3],
             L1p,
             L2p,
             intersectionpoint,
             '</G>',
-            clrs[0],
+            clrs[4],
             *shape, 
-            '<G stroke-dasharray="0.02 0.02">',clrs[1],
+            '<G stroke-dasharray="0.02 0.02">',clrs[4],
             *rshape,
             '</G>',
-            '<G stroke-width="0.002">',clrs[1],
+            '<G stroke-width="0.002">',clrs[4],
             *rlines,
             *rrlines,
             '</G>',
-            clrs[2],
+            clrs[5],
             *rrshape,
         ]
     return _graph_func

@@ -49,8 +49,14 @@ from animations.relativity.synchronize import (
     synchronize_0, synchronize_1, synchronize_2, synchronize_3,
     synchronize_4, synchronize_5, synchronize_6, synchronize_7,
     synchronize_8, synchronize_9, synchronize_10, synchronize_11, synchronize_12,
-time_dilation_0,
-time_dilation_1,
-time_dilation_2,
+    time_dilation_0,
+    time_dilation_1,
+    time_dilation_2,
+    time_dilation_3,
+    length_contraction_0,
+    length_contraction_1,
+    length_contraction_2,
+    length_contraction_3,
+    length_contraction_4,
 )
 from animations.relativity.elements import elements_events, elements_world_lines, elements_world_planes, elements_bireflections

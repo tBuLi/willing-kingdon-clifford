@@ -34,11 +34,12 @@ def refl_2d_graph_func():
     rlines = zip(_rpoints1, points1)
     
     return [
+        clrs[-3],
         L1p,
         P1p,
-        clrs[2],
+        clrs[4],
         *shape, 
-        clrs[0],
+        clrs[5],
         *rshape,
         '<G stroke-width="0.002">',clrs[0],
         *rlines,

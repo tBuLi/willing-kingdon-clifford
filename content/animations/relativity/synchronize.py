@@ -37,8 +37,8 @@ firework2 = alg.vector(e0=1, e1=1.5).dual()
 
 def synchronize_base():
     return [
-        0xffffff, t_label,  0, 'ct',
-        0xffffff, x_label, 0, 'x',
+        '<G fill-opacity="0.0">', t_label, '</G>', clrs[-3], 'ct',
+        '<G fill-opacity="0.0">', x_label, '</G>', clrs[-3], 'x',
         '<G stroke-width="0.003">',
         -alg.blades.e1, alg.blades.e2, 
         '</G>',
@@ -46,13 +46,13 @@ def synchronize_base():
 def synchronize_0():
     return [
         *synchronize_base(),
-        0xffffff, master_clock, 0, "🕛",
+        '<G fill-opacity="0.0">', master_clock, '</G>', clrs[-3], "🕛",
     ]
 
 def synchronize_1(clock_labels=clock_labels_1, translation=1):
     return [
         *synchronize_base(),
-        0xffffff, *itertools.chain(*((c, label) for c, label in zip(translation >> clocks, clock_labels)))
+        *itertools.chain(*(('<G fill-opacity="0.0">', c, '</G>', clrs[-3], label) for c, label in zip(translation >> clocks, clock_labels))),
     ]
 
 def synchronize_2(clock_labels=clock_labels_2, translation=alg.evenmv(e=1, e02=-0.25)):
@@ -113,7 +113,7 @@ def synchronize_6():
         *axes_t,
         '</G>',
         '<G stroke-dasharray="0.03 0.03">',
-        clrs[5], ep, em,
+        clrs[7], ep, em,
         '</G>',
         *synchronize_base(),
     ]
@@ -122,7 +122,7 @@ def synchronize_7():
     return [
         *synchronize_6(),
         '<G stroke-width="0.03" fill-opacity="0.001">',
-        clrs[0], wl1, wl1_label,
+        clrs[1], wl1, wl1_label,
         '</G>',	
          "ℓ",
     ]
@@ -131,7 +131,7 @@ def synchronize_8():
     return [
         *synchronize_7(),
         '<G stroke-width="0.03" fill-opacity="0.001">',
-        clrs[2], wl2, wl2_label,
+        clrs[5], wl2, wl2_label,
         '</G>',
         "ℓ'",
     ]
@@ -139,7 +139,7 @@ def synchronize_8():
 def synchronize_9():
     return [
         *synchronize_8(),
-        0,
+        clrs[6],
         '<G stroke-width="0.03" fill-opacity="1.0">',
         firework1,
         '</G>',
@@ -153,7 +153,7 @@ def synchronize_9():
 def synchronize_10():
     return [
         *synchronize_9(),
-        0,
+        clrs[5],
         '<G stroke-width="0.03" stroke-dasharray="0.03 0.03">',
         bisector, 
         # "ℓ₁ + ℓ₂",
@@ -163,8 +163,8 @@ def synchronize_10():
 def synchronize_11():
     return [
         *synchronize_9(),
-        '<G stroke-opacity="0.6">',
-        clrs[3],
+        '<G stroke-opacity="0.3">',
+        clrs[5],
         *axes_xp, 
         *axes_tp, 
         # "ℓ₁ + ℓ₂",
@@ -180,10 +180,11 @@ def synchronize_12(t):
 # TIME DILATION
 scene_time_dilation_prime = [
     '',
+    clrs[-3],
     f'γ={lorentz_factor}',
     *synchronize_8(),
-    '<G stroke-opacity="0.6">',
-    clrs[3],
+    '<G stroke-opacity="0.3">',
+    clrs[5],
     *axes_xp,
     *axes_tp,
     '</G>',	
@@ -193,8 +194,8 @@ tick1p, tick2p = alg.vector(e0=1, e1=0, e2=1).dual(), alg.vector(e0=1, e1=0, e2=
 def time_dilation_0():
     return [
         *scene_time_dilation_prime,
-        0, [tick1p, tick2p], 'T',
-        clrs[3], tick1p, f' {2*tick1p.e01:.2f}', tick2p,
+        clrs[4], [tick1p, tick2p], "T'",
+        clrs[4], tick1p, f' {2*tick1p.e01:.2f}', tick2p,
     ]
 
 def time_dilation_1(t):
@@ -209,7 +210,60 @@ mark2 = tick2 @ wl1
 def time_dilation_2():
     return [
         *scene_time_dilation,
-        0, [mark2, mark1], "T'",
-        clrs[1],
+        clrs[3], [mark2, mark1], "T",
+        clrs[3],
         mark1, f'{-2*mark1.e01:.2f}',
     ]
+
+def time_dilation_3():
+    p = tick1p@normalized(boost >> wl1)
+    l = (p & tick2p)
+    return [
+        *time_dilation_0(),
+        clrs[3], p, f'{2*(-l.normsq().e)**0.5:.2f}', l,
+    ]
+
+
+# Length Contraction
+backp1 = normalized(alg.evenmv(e=1, e01=0.25) * boost >> wl2)
+backp2 = normalized(alg.evenmv(e=1, e01=0.5) * boost >> wl2)
+back1 = ~boost >> backp1
+back2 = ~boost >> backp2
+wlp1 = boost >> wl1
+wlp2 = boost >> wl2
+p1 = alg.evenmv(e=1, e01=0.25) * boost >> tick2
+p2 = alg.evenmv(e=1, e01=0.5) * boost >> tick2
+length_prime = (p1 & p2).norm().e
+
+def length_contraction_0():
+    return [
+        *scene_time_dilation_prime,
+        '<G stroke-dasharray="0.05 0.05">',
+        clrs[4], -backp1, "b'", -backp2, "f'",
+        '</G>',
+        p1, p2, [p1, p2],
+    ]
+
+scene_length_contraction_prime = [x if isinstance(x, (int, float, str)) else ~boost >> x for x in length_contraction_0()]
+xtick1, xtick2 = normalized(alg.blades.e2^back1), normalized(alg.blades.e2^back2)
+length = (xtick1 & xtick2).norm().e
+def length_contraction_1(t):
+    t = min(t, 1.0)
+    L = (t*boost.grade(2)).exp()
+    return [x if isinstance(x, (int, float, str)) else L >> x for x in length_contraction_0()]
+
+def length_contraction_2():
+    return [
+        *scene_length_contraction_prime,
+    ]
+
+def length_contraction_3():
+    return [
+        *scene_length_contraction_prime,
+        clrs[3], xtick1, f'{2*length:.2f}', xtick2, [xtick1, xtick2],
+    ]
+
+def length_contraction_4(t):
+    t = min(t, 1.0)
+    L = (t*~boost.grade(2)).exp()
+    return [x if isinstance(x, (int, float, str)) else L >> x for x in length_contraction_3()]

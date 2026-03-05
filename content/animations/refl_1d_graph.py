@@ -35,10 +35,11 @@ t0 = None
 
 def refl_1d_graph_func_0():
     return [
+        clrs[-3],
         [_begin_point_line, _end_point_line],
         pa, 'a',
         '<G stroke-width="0.05">',
-        clrs[0],
+        clrs[4],
         line_segment,
         line_segment[-1],
         '</G>',
@@ -46,15 +47,9 @@ def refl_1d_graph_func_0():
 
 def refl_1d_graph_func_1():
     return [
-        [_begin_point_line, _end_point_line],
-        pa, 'a',
+        *refl_1d_graph_func_0(),
         '<G stroke-width="0.05">',
-        clrs[0],
-        line_segment,
-        line_segment[-1],
-        '</G>',
-        '<G stroke-width="0.05">',
-        clrs[2],
+        clrs[5],
         line_segment_a,
         line_segment_a[-1],
         '</G>',
@@ -62,21 +57,11 @@ def refl_1d_graph_func_1():
 
 def refl_1d_graph_func_2():
     return [
-        [_begin_point_line, _end_point_line],
-        pa, 'a',
+        *refl_1d_graph_func_1(),
+        clrs[-3],
         pb, 'b',
         '<G stroke-width="0.05">',
-        clrs[0],
-        line_segment,
-        line_segment[-1],
-        '</G>',
-        '<G stroke-width="0.05">',
-        clrs[2],
-        line_segment_a,
-        line_segment_a[-1],
-        '</G>',
-        '<G stroke-width="0.05">',
-        clrs[0],
+        clrs[4],
         line_segment_b,
         line_segment_b[-1],
         '</G>',
@@ -94,27 +79,8 @@ def refl_1d_graph_func_3():
     R = np.cos(omega) + line * np.sin(omega)
     
     return [
-        [_begin_point_line, _end_point_line],
         '<G stroke-width="0.02" stroke-opacity="0.5">',
         *[[R >> gl[0], R >> gl[1]] for gl in grid_lines],
         '</G>',
-        '<G stroke-width="0.05">',
-        pa, 'a',
-        pb, 'b',
-        '</G>',
-        '<G stroke-width="0.05">',
-        clrs[0],
-        line_segment,
-        line_segment[-1],
-        '</G>',
-        '<G stroke-width="0.05">',
-        clrs[2],
-        line_segment_a,
-        line_segment_a[-1],
-        '</G>',
-        '<G stroke-width="0.05">',
-        clrs[0],
-        line_segment_b,
-        line_segment_b[-1],
-        '</G>',
+        *refl_1d_graph_func_2(),
     ]
