@@ -215,7 +215,12 @@ def time_dilation_2():
         mark1, f'{-2*mark1.e01:.2f}',
     ]
 
-def time_dilation_3():
+def time_dilation_3(t):
+    t = min(t, 1.0)
+    L = (t*~boost.grade(2)).exp()
+    return [x if isinstance(x, (int, float, str)) else L >> x for x in time_dilation_2()]
+
+def time_dilation_4():
     p = tick1p@normalized(boost >> wl1)
     l = (p & tick2p)
     return [

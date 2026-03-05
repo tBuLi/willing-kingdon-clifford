@@ -53,6 +53,7 @@ from animations.relativity.synchronize import (
     time_dilation_1,
     time_dilation_2,
     time_dilation_3,
+    time_dilation_4,
     length_contraction_0,
     length_contraction_1,
     length_contraction_2,
