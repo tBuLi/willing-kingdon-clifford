@@ -79,7 +79,7 @@ def refl_1d_graph_func_3():
     R = np.cos(omega) + line * np.sin(omega)
     
     return [
-        '<G stroke-width="0.02" stroke-opacity="0.5">',
+        '<G stroke-width="0.02" stroke-opacity="0.9">',
         *[[R >> gl[0], R >> gl[1]] for gl in grid_lines],
         '</G>',
         *refl_1d_graph_func_2(),
