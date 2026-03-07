@@ -38,8 +38,7 @@ jobs:
           --output-dir=dist
           --template=reveal
           --VoilaConfiguration.theme=dark
-          --VoilaConfiguration.resources="{'reveal': {'theme': 'dracula', 'scroll':
-    False, 'url_prefix': 'https://unpkg.com/reveal.js@5.1.0'}}"
+          --VoilaConfiguration.resources="{'reveal': {'theme': 'dracula', 'scroll': False, 'url_prefix': 'https://unpkg.com/reveal.js@5.1.0'}}"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
