@@ -1,11 +1,11 @@
 # Core modules (mandatory)
-jupyterlite-core==0.3.0
-jupyterlab~=4.1.6
-notebook~=7.1.2
+jupyterlite-core==0.7.3
+jupyterlab>=4.5.5,<4.6
+notebook>=7.5.4,<7.6
 
 
 # Python kernel (optional)
-jupyterlite-pyodide-kernel==0.3.2
+jupyterlite-pyodide-kernel==0.7.1
 
 # JupyterLab: dark theme
 jupyterlab-night
@@ -14,4 +14,4 @@ jupyterlab_miami_nights
 
 # Teahouse dependencies
 anywidget==0.9.13
-voici-core~=0.6
+voici-core==0.10.0
