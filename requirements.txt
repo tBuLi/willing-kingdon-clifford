@@ -1,19 +1,18 @@
 # Core modules (mandatory)
-# Pinned to 0.7.0 to match the JupyterLite 0.7.0-era JS bundled inside voici-core 0.10.0.
-# See voila-dashboards/voici#178.
-jupyterlite-core==0.7.0
-jupyterlab>=4.5.5,<4.6
-notebook>=7.5.0,<7.6
+# voici-core 0.10.0 has a broken module-federation match with all published
+# jupyterlite-pyodide-kernel wheels (voila-dashboards/voici#178, "No kernel
+# available"). Downgrade the whole stack to the 0.6.x line, which voici-core
+# 0.9.0 was actually built against.
+jupyterlite-core>=0.6.0,<0.7
+jupyterlab>=4.4,<4.5
+notebook>=7.4,<7.5
 
 
 # Python kernel (optional)
-# 0.7.0a5 is the only released kernel whose JS extension was built against the same
-# JupyterLite 0.7.0-era assets that voici-core 0.10.0 ships. Newer 0.7.x kernels require
-# @jupyterlab/* ^4.5.8 / ^4.6.8 and @jupyterlite/services ~0.7.5, which voici-core 0.10.0
-# does not yet bundle, causing webpack module federation to refuse loading the kernel
-# extension ("No kernel available").
-jupyterlite-pyodide-kernel==0.7.0a5
+# 0.6.1's pyodide-kernel-extension requires @jupyterlab/* ^4.4.0 and
+# @jupyterlite/server ^0.6.0 — exactly what voici-core 0.9.0 bundles.
+jupyterlite-pyodide-kernel>=0.6.1,<0.7
 
 # Teahouse dependencies
 anywidget==0.9.13
-voici-core==0.10.0
+voici-core==0.9.0
