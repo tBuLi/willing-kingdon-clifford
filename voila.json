@@ -1,7 +1,6 @@
 {
   "VoilaConfiguration": {
     "template": "reveal",
-    "theme": "dark",
     "resources": {
       "reveal": {
         "scroll": false,
