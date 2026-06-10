@@ -1,1 +1,8 @@
-# Martin Roelfs AGACSE2024 talk
+# Martin Roelfs's talks
+- AGACSE2024
+- ECM2024
+- UA_seminar_2024
+- SHONAN2025
+- NAIST2025
+- GAME26
+- CIRPCAT2026
