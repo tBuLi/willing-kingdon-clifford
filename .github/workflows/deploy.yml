@@ -40,6 +40,27 @@ jobs:
           --VoilaConfiguration.theme=dark
           --VoilaConfiguration.resources="{'reveal': {'theme': 'dracula', 'scroll': False, 'url_prefix': 'https://unpkg.com/reveal.js@5.1.0'}}"
 
+      # The reveal template renders <script src="{fullStaticUrl}/reveal.js">, but only
+      # voila ships that bundle (under its base template) -- voici does not copy it into
+      # its own static dir. Without this the script 404s, Reveal never initializes, and
+      # every deck renders as a blank background once the cells have run.
+      - name: Vendor the reveal.js bundle into the voici build
+        run: |
+          python - <<'EOF'
+          import pathlib, shutil
+          from jupyter_core.paths import jupyter_path
+
+          dest = pathlib.Path("dist/voici/build/reveal.js")
+          for root in jupyter_path():
+              src = pathlib.Path(root) / "voila" / "templates" / "base" / "static" / "reveal.js"
+              if src.is_file():
+                  shutil.copy(src, dest)
+                  print(f"copied {src} -> {dest}")
+                  break
+          else:
+              raise SystemExit("could not find voila's reveal.js in any Jupyter data dir")
+          EOF
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
