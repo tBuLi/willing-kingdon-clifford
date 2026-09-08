@@ -32,7 +32,7 @@ jobs:
       - name: Build the JupyterLite site
         shell: bash -l {0}
         run: >-
-          voici
+          python voici_build.py
           build
           --contents=content
           --output-dir=dist
